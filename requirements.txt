@@ -1,0 +1,2 @@
+ipython-cluster-helper
+bcbio-nextgen

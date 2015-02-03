@@ -1,0 +1,1 @@
+This package is helping to use ipython-cluster-helper in order to create any pipeline with custom steps and send it to any queue systems. As well, the idea is to use functions implemented in bcbio like: bam, fastq, alignment ... maniputaltion, commonly used in NGS data.
