@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 def readme():
-    with open('README.rst') as f:
+    with open('README.md') as f:
         return f.read()
 
 with open("requirements.txt", "r") as f:
@@ -9,7 +9,7 @@ with open("requirements.txt", "r") as f:
 
 
 setup(name='ichwrapper',
-      version='0.99.01',
+      version='0.99.2',
       description='easy use of ipython-cluster-helper',
       long_description=readme(),
       classifiers=[

@@ -3,7 +3,7 @@ from bcbio.log import logger
 from cluster_helper import cluster as ipc
 
 
-config_default = {'mem': 8, 'cores': 1}
+config_default = {'name': 'std', 'mem': 8, 'cores': 1}
 
 
 def get_cluster_view(args):
@@ -38,11 +38,10 @@ def flag_done(step):
 def send_job(fn, data, args, resources=None):
     """decide if send jobs with ipython or run locally"""
     res = []
-    step = resources['name']
     if not resources:
         resources = config_default
-        step = "test"
-    logger.my_logger.debug("doing %s" % step)
+    step = resources['name']
+    logger.debug("doing %s" % step)
     if 'mem' not in resources or 'cores' not in resources:
         raise ValueError("resources without mem or cores keys: %s" % resources)
     else:
