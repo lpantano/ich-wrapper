@@ -1,10 +1,9 @@
 from unittest import TestCase
-import os
+# import os
 import time
+
 from argparse import ArgumentParser
-import inspect
 from bcbio.log import logger
-import ichwrapper
 from ichwrapper import arguments, cluster
 
 

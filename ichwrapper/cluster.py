@@ -1,7 +1,8 @@
 import os
+
+from bcbio import utils
 from bcbio.log import logger
 from cluster_helper import cluster as ipc
-
 
 config_default = {'name': 'std', 'mem': 8, 'cores': 1}
 
@@ -16,7 +17,7 @@ def get_cluster_view(args):
                           profile="ipython",
                           extra_params={"resources": args.resources,
                                         "mem": args.memory_per_job,
-                                        "tag": "ts",
+                                        "tag": "ichwrapper",
                                         "run_local": args.local})
 
 
@@ -37,6 +38,7 @@ def flag_done(step):
 
 def send_job(fn, data, args, resources=None):
     """decide if send jobs with ipython or run locally"""
+    utils.safe_makedir("checkpoint")
     res = []
     if not resources:
         resources = config_default

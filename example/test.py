@@ -2,8 +2,7 @@ import time
 from argparse import ArgumentParser
 
 from ichwrapper import arguments, cluster, fake
-from bcbio.log import logger
-
+from ichwrapper.log import logger
 
 if __name__ == "__main__":
         start = time.time()
