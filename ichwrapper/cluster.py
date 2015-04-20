@@ -1,7 +1,7 @@
 import os
 
 from bcbio import utils
-from bcbio.log import logger
+import log
 from cluster_helper import cluster as ipc
 
 config_default = {'name': 'std', 'mem': 8, 'cores': 1}
@@ -12,7 +12,7 @@ def get_cluster_view(args):
         os.mkdir("ipython")
         os.mkdir("checkpoint")
     return ipc.cluster_view(args.scheduler, args.queue,
-                          args.num_jobs, args.cores_per_job,
+                          args.numcores, args.cores_per_job,
                           start_wait=args.timeout,
                           profile="ipython",
                           extra_params={"resources": args.resources,
@@ -43,13 +43,14 @@ def send_job(fn, data, args, resources=None):
     if not resources:
         resources = config_default
     step = resources['name']
-    logger.debug("doing %s" % step)
     if 'mem' not in resources or 'cores' not in resources:
         raise ValueError("resources without mem or cores keys: %s" % resources)
     else:
         args.memory_per_job = resources['mem']
         args.cores_per_job = resources['cores']
-    if args.parallel == "ipython":
+    log.setup_log(args)
+    log.logger.debug("doing %s" % step)
+    if args.paralleltype == "ipython":
         if not is_done(step):
             with get_cluster_view(args) as view:
                 for sample in data:
