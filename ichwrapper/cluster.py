@@ -9,8 +9,8 @@ config_default = {'name': 'std', 'mem': 8, 'cores': 1}
 
 def get_cluster_view(args):
     if not os.path.exists("ipython"):
-        os.mkdir("ipython")
-        os.mkdir("checkpoint")
+        utils.safe_makedir("ipython")
+        utils.safe_makedir("checkpoint")
     return ipc.cluster_view(args.scheduler, args.queue,
                           args.numcores, args.cores_per_job,
                           start_wait=args.timeout,
