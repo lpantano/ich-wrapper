@@ -7,8 +7,8 @@ from bcbio.distributed import clargs
 from bcbio.provenance import system
 import bcbio.distributed.resources as res
 from bcbio.distributed.ipython import create
-from bcbio import log
-# import log
+# from bcbio import log
+import log
 from cluster_helper import cluster as ipc
 
 config_default = {'name': 'std', 'mem': 8, 'cores': 1}
@@ -48,8 +48,9 @@ def _calculate_resources(data, args, resources):
     config = data[0][0]['config']
     config['resources'].update({resources['name']: {'memory': "%sg" % resources['mem'], 'cores': resources['cores']}})
     parallel.update({'progs': [resources['name']]})
-    parallel = log.create_base_logger(config, parallel)
-    log.setup_local_logging(config, parallel)
+    # parallel = log.create_base_logger(config, parallel)
+    # log.setup_local_logging(config, parallel)
+    log.setup_log(config, parallel)
     dirs = {'work': os.path.abspath(os.getcwd())}
     system.write_info(dirs, parallel, config)
     sysinfo = system.machine_info()[0]

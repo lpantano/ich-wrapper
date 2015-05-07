@@ -1,6 +1,6 @@
 import time
 try:
-    from bcbio.provenance import do
+    from log import run
 except ImportError:
     None
 
@@ -11,6 +11,6 @@ def fake_fn(data, args):
 
 
 def fake_cmd_fn(data, args):
-    do.run("ls *", "testing cmds")
+    run("ls *", "testing cmds")
     print 'inside function with %s' % data
     time.sleep(data['num'] * 2)

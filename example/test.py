@@ -13,7 +13,9 @@ if __name__ == "__main__":
         # args = parser.parse_args(["--parallel", "ipython", "--local"])
         logger.info(args)
         resources = {'name': 'step1', 'mem': 1, 'cores': 1}
-        cluster.send_job(fake.fake_fn, [1, 2], args, resources)
+        data = [{'num': 1}, {'num': 2}]
+        data = cluster.update_samples(data, resources, args)
+        cluster.send_job(fake.fake_fn, data, args, resources)
         if args.cmd:
-            cluster.send_job(fake.fake_cmd_fn, [1, 2], args, resources)
+            cluster.send_job(fake.fake_cmd_fn, data, args, resources)
         logger.info('It took %.3f minutes with ipython' % ((time.time()-start)/60))
