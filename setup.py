@@ -9,7 +9,7 @@ with open("requirements.txt", "r") as f:
 
 
 setup(name='ichwrapper',
-      version='0.99.2',
+      version='0.99.3',
       description='easy use of ipython-cluster-helper',
       long_description=readme(),
       classifiers=[
