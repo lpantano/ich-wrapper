@@ -14,11 +14,12 @@ def myargs(parser):
     parser.add_argument("-s", "--scheduler", help="Type of scheduler to use.",
                         choices=["lsf", "slurm", "torque", "sge", "pbspro"])
     parser.add_argument("-r", "--resources", help="Extra scheduler resource flags.", default=[], action="append")
-    parser.add_argument("-q", "--queue", help="Queue to submit jobs to.")
+    parser.add_argument("-q", "--queue", help="Queue to submit jobs to. Use localrun to use run in parallel locally.")
     parser.add_argument("-p", "--tag", help="Tag name to label jobs on the cluster", default="bcb-prep")
     parser.add_argument("-t", "--paralleltype",
                         choices=["local", "ipython"],
                         default="local", help="Run with iptyhon")
-    parser.add_argument("--local", default=False, action='store_true', help="Run cluster locally")
+    # parser.add_argument("--local", default=False, action='store_true', help="Run cluster locally")
+    parser.add_argument("--galaxy", help="bcbio galaxy resources.")
 
     return parser

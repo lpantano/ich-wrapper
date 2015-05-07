@@ -5,12 +5,12 @@ except ImportError:
     None
 
 
-def fake_fn(n, args):
-    print 'inside function with %s' % n
-    time.sleep(n * 2)
+def fake_fn(data, args):
+    print 'inside function with %s' % data
+    time.sleep(data['num'] * 2)
 
 
-def fake_cmd_fn(n, args):
+def fake_cmd_fn(data, args):
     do.run("ls *", "testing cmds")
-    print 'inside cmd function with %s' % n
-    time.sleep(n * 2)
+    print 'inside function with %s' % data
+    time.sleep(data['num'] * 2)
