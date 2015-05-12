@@ -29,7 +29,7 @@ def get_cluster_view(args):
 
 
 def wait_until_complete(jobs):
-    return [j.get() for j in jobs]
+    return [[j.get()] for j in jobs] 
 
 
 def is_done(step):
@@ -93,16 +93,15 @@ def send_job(fn, data, args, resources=None):
     # args.cores_per_job = resources['cores']
     # log.setup_log(args)
     log.logger.debug("doing %s" % step)
-    if par['type'] == "ipython":
-        if not is_done(step):
-            with create(par, dirs, config) as view:
-                for sample in data:
-                    res.append(view.apply_async(fn, sample[0], args))
-                res = wait_until_complete(res)
-            flag_done(step)
-            return res
+    if par['type'] == "ipython" and not is_done(step):
+        with create(par, dirs, config) as view:
+            for sample in data:
+                res.append(view.apply_async(fn, sample[0], args))
+            res = wait_until_complete(res)
+        flag_done(step)
+        return res
     for sample in data:
-        res.append(fn(sample[0], args))
+        res.append([fn(sample[0], args)])
     return res
 
 
